@@ -374,7 +374,7 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
             result.error("SERVICE_STATUS_ERROR", "Location service status couldn't be determined", null);
             return false;
         }
-        if (gps_enabled || network_enabled) {
+        if (gps_enabled && network_enabled) {
             if (result != null) {
                 result.success(1);
             }
