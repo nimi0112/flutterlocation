@@ -363,7 +363,7 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
     }
 
 
-    public boolean checkServiceEnabled(final Result result) {
+    synchronized public boolean checkServiceEnabled(final Result result) {
         boolean gps_enabled = false;
         boolean network_enabled = false;
 
@@ -388,11 +388,11 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
         }
     }
 
-    public boolean isGpsEnabled() {
+    synchronized public boolean isGpsEnabled() {
         return this.locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    public void requestService(final Result result) {
+    synchronized public void requestService(final Result result) {
         if (this.isGpsEnabled()) {
             result.success(1);
             return;
@@ -422,7 +422,7 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
             });
     }
 
-    public void startRequestingLocation() {
+    synchronized public void startRequestingLocation() {
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
             .addOnSuccessListener(activity, new OnSuccessListener<LocationSettingsResponse>() {
                 @Override
